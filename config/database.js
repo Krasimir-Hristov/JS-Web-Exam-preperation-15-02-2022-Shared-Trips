@@ -2,7 +2,7 @@ const mongoose = require(`mongoose`);
 require('../models/User');
 
 //TODO change database name
-const dbnName = 'wildlife'
+const dbnName = 'sharedTrip'
 
 const connectionString = `mongodb://localhost:27017/${dbnName}`;
 
