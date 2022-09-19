@@ -12,10 +12,6 @@ async function start() {
     expressConfig(app);
     await databaseConfig(app);
     routesConfig(app);
-
-    app.get(`/`, (req, res) => {  
-        console.log(req.session)
-        res.render('home', { layout: false })}); 
-    
+       
     app.listen(3000, () => console.log('server running or port 3000'));
 }
