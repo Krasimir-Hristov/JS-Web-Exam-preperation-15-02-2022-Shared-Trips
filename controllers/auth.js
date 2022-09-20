@@ -9,10 +9,9 @@ router.get('/register', isGuest(), (req, res) => {
     res.render('register')
 });
 
-//TODO check form action, method, field names
 router.post('/register', isGuest(), async (req, res) => {
     try {
-        if(req.body.password.trim() != '') {
+        if(req.body.password.trim() == '') {
             throw new Error('Passwords is required');
 
         }
@@ -23,16 +22,16 @@ router.post('/register', isGuest(), async (req, res) => {
         req.session.user = user;
         res.redirect('/'); 
     } catch (err) {
-        console.error(err);
         //TODO send error messages
         const errors = mapErrors(err);
-        res.render('register', { data: { email: req.body.email, gender: req.body.gender }, errors });
+        const isMale = req.body.gender == 'male';
+        res.render('register', { data: { email: req.body.email, isMale }, errors });
     }
 });
 
 router.get('/login', isGuest(), (req, res) => {
     res.render('login', { layout: false });
-});
+});   
 
 //TODO check form action, method, field names
 
