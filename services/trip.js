@@ -1,7 +1,11 @@
 const Trip = require('../models/Trip');
 
+async function getAllTrips() {
+    return Trip.find({}).lean();
+}
+
 async function getTripById(id) {
-    return Trip.findById(id);
+    return Trip.findById(id).lean();
 }
 
 async function createTrip(trip) {
@@ -11,5 +15,6 @@ async function createTrip(trip) {
 
 module.exports = {
     createTrip,
-    getTripById
+    getTripById,
+    getAllTrips
 }
