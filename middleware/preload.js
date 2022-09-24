@@ -1,14 +1,19 @@
 const tripService = require('../services/trip');
 
 
-function preload() {
-   return async function (req, res, next) {
-       const id = req.params.id;
-       const trip = await tripService.getTripById(id);
-       req.locals.trip = trip;
+function preload(populate) {
+    return async function (req, res, next) {
+        const id = req.params.id;
+        
+        if (populate) {
+            res.locals.trip = await tripService.getTripAndUsers(id);
+        } else {
+            res.locals.trip = await tripService.getTripById(id);
+        }
 
-       next();
-   };
+
+        next();
+    };
 }
 
 module.exports = preload;

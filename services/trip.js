@@ -8,6 +8,10 @@ async function getTripById(id) {
     return Trip.findById(id).lean();
 }
 
+async function getTripAndUsers(id) {
+    return Trip.findById(id).populate('owner').populate('buddies').lean();
+}
+
 async function createTrip(trip) {
     const result = new Trip(trip);
     await result.save();
@@ -16,5 +20,6 @@ async function createTrip(trip) {
 module.exports = {
     createTrip,
     getTripById,
-    getAllTrips
+    getAllTrips,
+    getTripAndUsers
 }

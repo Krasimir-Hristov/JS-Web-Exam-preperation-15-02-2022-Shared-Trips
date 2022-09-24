@@ -1,3 +1,4 @@
+const preload = require('../middleware/preload');
 const { getAllTrips } = require('../services/trip');
 
 const router = require('express').Router();
@@ -12,7 +13,9 @@ router.get('/trips', async (req, res) => {
     res.render('catalog', { title: 'Shared Trips', trips });
 });
 
-
+router.get('/trips/:id', preload(true), (req, res) => {
+    res.render('details', { title: 'Trip Details' });
+});
 
 
 module.exports = router;
