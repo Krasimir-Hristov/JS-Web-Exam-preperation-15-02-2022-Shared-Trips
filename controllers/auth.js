@@ -47,7 +47,7 @@ router.post('/login', isGuest(), async (req, res) => {
     }
 });
 
-router.get('/logout', isUser(), (req, res) => {
+router.get('/logout', isUser(),  (req, res) => {
     delete req.session.user;  
     res.redirect('/');
 })

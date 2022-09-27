@@ -1,6 +1,6 @@
 const { isUser, isOwner } = require('../middleware/guards');
 const preload = require('../middleware/preload');
-const { createTrip, updateTrip } = require('../services/trip');
+const { createTrip, updateTrip, deleteById } = require('../services/trip');
 const mapErrors = require('../util/mappers');
 
 const router = require('express').Router();
@@ -69,6 +69,10 @@ router.post('/create', isUser(), async (req, res) => {
     });
             
 
+    router.get('/delete/:id', preload(), isOwner(), async (req, res) => {
+        await deleteById(req.params.id);
+        res.redirect('/trips')
+    });     
 
 
-module.exports = router;
+module.exports = router;    
