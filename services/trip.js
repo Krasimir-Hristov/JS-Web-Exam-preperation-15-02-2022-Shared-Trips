@@ -4,6 +4,10 @@ async function getAllTrips() {
     return Trip.find({}).lean();
 }
 
+async function getTripsByUser(userId) {
+    return Trip.find({ owner: userId }).lean();
+}
+
 async function getTripById(id) {
     return Trip.findById(id).lean();
 }
@@ -54,5 +58,6 @@ module.exports = {
     getTripAndUsers,
     updateTrip,
     deleteById,
-    joinTrip
+    joinTrip,
+    getTripsByUser
 }
